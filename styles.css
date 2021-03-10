@@ -4,3 +4,12 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    font-family: fantasy;
+    background-color: bisque;
+    background: linear-gradient(rgb(236, 118, 118));
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+}
