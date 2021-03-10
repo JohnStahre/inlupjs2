@@ -22,8 +22,8 @@ const listTodos = () => {
     })
 }
 //en todo utan att koppa och klistra från html template, ett äldre sätt, men har sina fördlar
-const newTodo = () => {
-    let card =document.createElement('div');
+const newTodo = (todo) => {
+    let card = document.createElement('div');
     card.classList.add('card', 'p-3', 'my-3');
 
     let innerCard = document.createElement('div');
@@ -55,5 +55,33 @@ const newTodo = () => {
 
 }
 
+const createTodo = (title) => {
+    fetch('https://jsonplaceholder.typicode.com/todos/?_limit=10', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: {
+            body: JSON.stringify({
+                title,
+                completed: false //kommer alltid vara false för att den inte ska vara klar med en gång
+                
+                // userId: 1, id behövs inte skicka med
+        })
+    }
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+    })
+})
 
+form.addEventListener('submit', e => {
+    e.preventDefault();
 
+    //ta den lagrade variablen input och skapa en ny to do
+
+    createTodo(input.value)
+
+})
+
+}
