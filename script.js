@@ -55,20 +55,22 @@ const newTodo = (todo) => {
 
 }
 
+
+
+// Nedan, är exakt likadant som ovan men av någon anledning får jag megafel på detta skulle bra gärna vilja veta vad felet är---> fick till det, var en parantes runt json url som fattades
+
 const createTodo = (title) => {
-    fetch('https://jsonplaceholder.typicode.com/todos'), {
+    fetch('https://jsonplaceholder.typicode.com/todos', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         },
-        body: {
+        
             body: JSON.stringify({
                 title,
                 completed: false //kommer alltid vara false för att den inte ska vara klar med en gång
-                
-                // userId: 1, id behövs inte skicka med
-        })
-    }
+            })
+         }) //här borde det vara ) men jag får 3 olika fel då
     .then(res => res.json())
     .then(data => {
         console.log(data)
@@ -90,9 +92,9 @@ form.addEventListener('submit', e => {
     //ta den lagrade variablen input och skapa en ny to do
 
     createTodo(input.value);
-    input.value = '';
-    form.requestFullscreen();
+    // input.value = '';
+    form.reset();
 
 })
 
-}
+
