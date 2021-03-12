@@ -58,6 +58,7 @@ const newTodo = (todo) => {
 
 
 // Nedan, är exakt likadant som ovan men av någon anledning får jag megafel på detta skulle bra gärna vilja veta vad felet är---> fick till det, var en parantes runt json url som fattades
+// C N
 
 const createTodo = (title) => {
     fetch('https://jsonplaceholder.typicode.com/todos', {
@@ -90,7 +91,7 @@ form.addEventListener('submit', e => {
     e.preventDefault();
 
     //ta den lagrade variablen input och skapa en ny to do
-
+ //CN
     createTodo(input.value);
     // input.value = '';
     form.reset();
