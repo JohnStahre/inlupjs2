@@ -2,10 +2,11 @@ const form = document.querySelector('#todoForm');
 const input = document.querySelector('#todoInput');
 const output = document.querySelector('#output');
 
-let todos = [];
+let todos = []; //skapar array lista
+
 
 const fetchTodos = () => {
-    fetch('https://jsonplaceholder.typicode.com/todos/?_limit=10')
+    fetch('https://jsonplaceholder.typicode.com/todos/?_limit=10')          //api, json fetch hämta
     .then(res => res.json())
     .then(data => {
         todos = data;
@@ -39,12 +40,7 @@ const newTodo = (todo) => {
         console.log(todo.id)
     })
 
-    // let button2 = document.createElement('button');
-    // button.classList.add('btn', 'btn-info');
-    // button.innerText = 'edit';
-    // button.addEventListener('click', () => {
-    //     console.log('edit')
-    // })
+  
 
     //bygg ihop och lägg till i dom
 
@@ -57,45 +53,58 @@ const newTodo = (todo) => {
 
 
 
-// Nedan, är exakt likadant som ovan men av någon anledning får jag megafel på detta skulle bra gärna vilja veta vad felet är---> fick till det, var en parantes runt json url som fattades
-// C N
+// Nedan, är exakt likadant som ovan men av någon anledning får jag megafel på detta skulle bra gärna vilja veta vad felet är---> fick till det, var en parantes runt json som fattades
 
-const createTodo = (title) => {
+const nyTodo = (title) => {                                         //Skapar en funktionen create Todo och skjuter in titeln 
     fetch('https://jsonplaceholder.typicode.com/todos', {
-        method: 'POST',
+        method: 'POST',                                                 //post för att skriva ut
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         },
         
-            body: JSON.stringify({
-                title,
-                completed: false //kommer alltid vara false för att den inte ska vara klar med en gång
+            body: JSON.stringify({                                        //gör om json till javascript
+                title,                                                      //skriver ut title som anges i input
+                completed: false                                         //kommer alltid vara false för att den inte ska vara klar med en gång
             })
-         }) //här borde det vara ) men jag får 3 olika fel då
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
+         })                                                 //här borde det vara ) men jag får 3 olika fel då
+    .then(res => res.json())                                        //här får vi respons från json
+    .then(data => {                                                 //får tillbaka data från json
+        console.log(data)                                           //skriver ut i consolen
 
-        let newTodo = {
-            ...data, //en spread, samma sak som att lägga completed, id och title
+        let newTodo = {                                     //deklarerar en vad newTodo ska innehålla
+            ...data,                                        //en spread, samma sak som att lägga completed, id och title
             id: Date.now().toString()
          }
-        console.log(newTodo);
-        todos.unshift(newTodo);
-        listTodos();
+        console.log(newTodo);                               //Skriver ut i console
+        todos.unshift(newTodo);                             // ska lägga till todo överst i listan, men det lägger bara till 1 objektet, [0] ???
+        listTodos();                                           //lstar todos med funktionen listTodos()
    
     })
 }
+
+//nedan gör att inte kan lägga in tomt i todon
+
+const validateTodo = () => {
+    const todo = document.querySelector('#todoInput');
+    const todoError = document.querySelector('#todoError')
+
+    if(todo.value ===''){
+        todoError.innerText = 'Du måste lägga in todo'
+        
+    }
+}
+
 
 form.addEventListener('submit', e => {
     e.preventDefault();
 
     //ta den lagrade variablen input och skapa en ny to do
- //CN
-    createTodo(input.value);
-    // input.value = '';
-    form.reset();
 
+    validateTodo();
+    nyTodo(input.value);
+    // input.value = '';        //ett annat sätt att nolla
+    form.reset();
+ 
 })
 
 
