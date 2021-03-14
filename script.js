@@ -1,8 +1,11 @@
 const form = document.querySelector('#todoForm');
 const input = document.querySelector('#todoInput');
+const error = document.querySelector('#todoError');   //la till detta felmeddelande
 const output = document.querySelector('#output');
 
 let todos = []; //skapar array lista
+
+
 
 
 const fetchTodos = () => {
@@ -14,7 +17,7 @@ const fetchTodos = () => {
         listTodos();
     })
 }
-fetchTodos();
+
 
 const listTodos = () => {
     output.innerHTML = '';
@@ -22,6 +25,8 @@ const listTodos = () => {
         newTodo(todo);
     })
 }
+fetchTodos();
+
 //en todo utan att koppa och klistra från html template, ett äldre sätt, men har sina fördlar
 const newTodo = (todo) => {
     let card = document.createElement('div');
@@ -82,15 +87,20 @@ const nyTodo = (title) => {                                         //Skapar en 
     })
 }
 
-//nedan gör att inte kan lägga in tomt i todon
+//validering
 
 const validateTodo = () => {
-    const todo = document.querySelector('#todoInput');
-    const todoError = document.querySelector('#todoError')
+    // const input = document.querySelector(id);
+    // const error = document.querySelector(id +'-error');
 
-    if(todo.value ===''){
-        todoError.innerText = 'Du måste lägga in todo'
-        
+    if (input.value.trim() === ''){
+        error.innerText = "Please enter a todo"
+        input.focus();
+        return false;
+    }
+    else {
+        error.innerText = ''
+        return true;
     }
 }
 
@@ -101,10 +111,25 @@ form.addEventListener('submit', e => {
     //ta den lagrade variablen input och skapa en ny to do
 
     validateTodo();
-    nyTodo(input.value);
-    // input.value = '';        //ett annat sätt att nolla
-    form.reset();
+
+    
+if(validateTodo()) {
+        nyTodo(input.value) //lägg in 
+        form.reset()
+    }
+
+    //  validateTodo(id); {
+    //     nyTodo()
+    //     reset()
+    // }
+
+    // nyTodo(input.value);
+    // form.reset();
  
 })
 
-
+   // validateTodo(id); {
+    //     nyTodo()
+    //     reset()
+    // }
+    // input.value = '';        //ett annat sätt att nolla
