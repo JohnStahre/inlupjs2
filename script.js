@@ -1,6 +1,6 @@
 const form = document.querySelector('#todoForm');
 const input = document.querySelector('#todoInput');
-const error = document.querySelector('#todoError');   //la till detta felmeddelande
+const error = document.querySelector('#todoError');   //la till detta felmeddelande och kommenterade bort 
 const output = document.querySelector('#output');
 
 let todos = []; //skapar array lista
@@ -33,7 +33,7 @@ const newTodo = (todo) => {
     card.classList.add('card', 'p-3', 'my-3');
 
     let innerCard = document.createElement('div');
-    innerCard.classList.add('d-flex', 'justify-content-between', 'align-items-center');
+    innerCard.classList.add('d-flex', 'justify-content-between', 'align-items-center','p-3');
 
     let title = document.createElement('h3');
     title.innerText = todo.title;
@@ -43,7 +43,18 @@ const newTodo = (todo) => {
     button.innerText = 'Delete';
     button.addEventListener('click', () => {
         console.log(todo.id)
+
+    
     })
+
+    // let button2 = document.createElement('button');
+    // button.classList.add('btn', 'btn-primary');
+    // button.innerText = 'delete';
+    // button.addEventListener('click', () => {
+    //     console.log(todo.id)
+
+    
+    // })
 
   
 
@@ -51,6 +62,7 @@ const newTodo = (todo) => {
 
     innerCard.appendChild(title);
     innerCard.appendChild(button);
+    // innerCard.appendChild(button2);
     card.appendChild(innerCard);
     output.appendChild(card);
 
@@ -90,7 +102,7 @@ const nyTodo = (title) => {                                         //Skapar en 
 //validering
 
 const validateTodo = () => {
-    // const input = document.querySelector(id);
+    // const input = document.querySelector(id); hämtar in const error = document.querySelector('#todoError'); och därför kan dessa kommenteras bort 
     // const error = document.querySelector(id +'-error');
 
     if (input.value.trim() === ''){
@@ -108,28 +120,14 @@ const validateTodo = () => {
 form.addEventListener('submit', e => {
     e.preventDefault();
 
-    //ta den lagrade variablen input och skapa en ny to do
-
     validateTodo();
 
     
 if(validateTodo()) {
-        nyTodo(input.value) //lägg in 
+        nyTodo(input.value) 
         form.reset()
     }
-
-    //  validateTodo(id); {
-    //     nyTodo()
-    //     reset()
-    // }
-
-    // nyTodo(input.value);
-    // form.reset();
  
 })
 
-   // validateTodo(id); {
-    //     nyTodo()
-    //     reset()
-    // }
-    // input.value = '';        //ett annat sätt att nolla
+   
